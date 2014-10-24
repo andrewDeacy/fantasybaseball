@@ -1,7 +1,9 @@
+__author__ = 'Andrew'
 from rauth import OAuth1Service
 from rauth.utils import parse_utf8_qsl
 import pickle
 import time
+
 
 class YahooAPI:
     # access token lifetime in seconds
@@ -9,6 +11,7 @@ class YahooAPI:
 
     # one request every X seconds to try to prevent 999 error codes
     request_period = 2
+    keyfile = open('keyfile.txt', 'r')
 
     def __init__(self, keyfile, tokenfile=None):
 
@@ -58,8 +61,8 @@ class YahooAPI:
 
             authorize_url = self.oauth.get_authorize_url(request_token)
 
-            print "Sign in here: " + str(authorize_url)
-            verification_code = raw_input("Enter code: ")
+            print ("Sign in here: " + str(authorize_url))
+            verification_code = input("Enter code: ")
 
             self.access_token_time = time.time()
 
